@@ -1,5 +1,6 @@
 package com.example.jeedemo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -8,6 +9,7 @@ import javax.persistence.PersistenceContext;
 
 import com.example.jeedemo.domain.Gasnica;
 import com.example.jeedemo.domain.Producent;
+import com.example.jeedemo.domain.Wlasciciel;
 
 @Stateless
 public class GasnicaManager {
@@ -26,9 +28,32 @@ public class GasnicaManager {
 		gasnica.setProducent(producent);
 	}
 	
+	public void addWlascicielToGasnicaList(Long gasnicaId, List<Wlasciciel> tempList){
+		Gasnica gasnica = em.find(Gasnica.class, gasnicaId);
+		for(Wlasciciel w : tempList)
+			gasnica.getWlasciciele().add(w);
+		//gasnica.setWlasciciele(tempList);
+	}
+	
+
+//	
+	public void addWlascicielToGasnica(Long gasnicaId, List<Long> listaId){
+		Gasnica gasnica = em.find(Gasnica.class, gasnicaId);
+		for(Long id : listaId){
+			Wlasciciel wlasciciel = em.find(Wlasciciel.class, id);
+			gasnica.getWlasciciele().add(wlasciciel);
+		}
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	public List<Gasnica> getAllGasnice(){
 		return em.createNamedQuery("gasnica.getAllGasnice").getResultList();
 	}
 
+	public EntityManager getEm() {
+		return em;
+	}
+
+	
 }

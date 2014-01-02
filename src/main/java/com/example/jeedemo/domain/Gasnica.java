@@ -56,6 +56,4 @@ public class Gasnica {
 		this.wlasciciele = wlasciciele;
 	}
 	
-	
-	
 }

@@ -22,4 +22,8 @@ public class WlascicielManager {
 	public List<Wlasciciel> getAllWlasciciele(){
 		return em.createNamedQuery("wlasciciel.getAll").getResultList();
 	}
+	
+	public Wlasciciel getWlascicielId(Long wlascicielId){
+		return em.find(Wlasciciel.class, wlascicielId);
+	}
 }

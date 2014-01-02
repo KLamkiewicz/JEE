@@ -8,14 +8,13 @@ import javax.inject.Named;
 import com.example.jeedemo.domain.Wlasciciel;
 import com.example.jeedemo.service.WlascicielManager;
 
-abstract
-
 @SessionScoped
 @Named("wlascicielBean")
 public class WlascicielFormBean implements Serializable{
 
 	private Wlasciciel wlasciciel = new Wlasciciel();
 	private ListDataModel<Wlasciciel> wlasciciele = new ListDataModel<Wlasciciel>();
+	private Long wlascicielId;
 	
 	@Inject
 	WlascicielManager wm;
@@ -39,4 +38,14 @@ public class WlascicielFormBean implements Serializable{
 		wlasciciele.setWrappedData(wm.getAllWlasciciele());
 		return wlasciciele;
 	}
+
+	public Long getWlascicielId() {
+		return wlascicielId;
+	}
+
+	public void setWlascicielId(Long wlascicielId) {
+		this.wlascicielId = wlascicielId;
+	}
+	
+	
 }

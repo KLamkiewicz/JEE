@@ -5,12 +5,14 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/templates/default.xhtml"
 	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich">
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="content">
 
 		<h:form id="gasnicaForm">
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="2" id="gasnica">
 
 				<h:outputText value="Pojemnosc" />
 				<h:inputText id="pojemnosc" value="#{gasnicaBean.gasnica.pojemnosc}"
@@ -21,13 +23,24 @@
 
 				<h:outputText value="Producent"  />
 				<h:selectOneMenu value="#{gasnicaBean.producentId}" required="true" requiredMessage="Gasnica musi posiadac producenta"> 
+					<f:selectItem itemLabel="Wybierz producenta"/>
 					<f:selectItems value="#{gasnicaBean.allProducenci}" var="c" itemValue="#{c.id}" itemLabel="#{c.nazwa}"/>
 				</h:selectOneMenu> 
 
+				 
+				<h:outputText value = "Wlasciciel"  />				
+				<h:selectManyListbox value="#{gasnicaBean.wlascicieleTemp}" converter="listaConverter">
+					<f:selectItems  value="#{gasnicaBean.allWlasciciele}" var="c" itemValue="#{c}" itemLabel="#{c.imie} #{c.nazwisko}"/>
+				</h:selectManyListbox>
+				
+				<!-- 
+				<p:pickList value="#{gasnicaBean.tempList}" var="entity" itemValue="#{entity}" itemLabel="#{entity.imie}">
+            		<o:converter converterId="omnifaces.ListConverter" list="#{gasnicaBean.allWlasciciele}" />
+        		</p:pickList>
+				-->
+				
 			</h:panelGrid>
-
-			<h:commandButton value="OK"
-				action="#{gasnicaBean.addGasnica()}"/>
+			<h:commandButton value="OK" action="#{gasnicaBean.addGasnica()}"/>
 
 			<h:panelGrid>
 				<h:messages for="" />
